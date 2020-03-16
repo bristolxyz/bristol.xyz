@@ -3,13 +3,18 @@ package main
 import (
 	"os"
 
+	"github.com/bristolxyz/bristol.xyz/clients"
 	"github.com/getsentry/sentry-go"
 	sentryecho "github.com/getsentry/sentry-go/echo"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
+	// Load .env if we can.
+	_ = godotenv.Load()
+
 	// Load Sentry.
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn: os.Getenv("SENTRY_DSN"),
@@ -17,6 +22,16 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// Load Redis.
+	err = clients.CreateRedisClient()
+	if err != nil {
+		sentry.CaptureException(err)
+		panic(err)
+	}
+
+	// Load S3.
+	clients.S3Init()
 
 	// Create the web server.
 	e := echo.New()

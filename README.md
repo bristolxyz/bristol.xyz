@@ -28,6 +28,7 @@ To configure bristol.xyz, you will need to set the following environment variabl
 
 #### S3 Configuration
 - `S3_ENDPOINT` - The endpoint for the S3 provider such as Amazon S3 or DigitalOcean Spaces.
+- `S3_REGION` - The S3 region.
 - `S3_BUCKET` - The S3 bucket name.
 - `CDN_HOSTNAME` - The hostname for the CDN which is running from the bucket. For example, `cdn.bristol.xyz`.
 - `AWS_SECRET_ACCESS_KEY` - The AWS secret access key for the bucket which we are using for the CDN.
