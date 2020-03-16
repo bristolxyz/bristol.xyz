@@ -40,7 +40,7 @@ Now we have the environment variables listed down, we can continue the setup:
 For working on the project locally, you can simply make a `.env` file with the contents above in. This is ignored by Git in this project, so you can rest assure that you will not accidentally commit this. Ensure you have a version of node, nvm and Go 1.14+ installed and then you can do one of the following:
 - **Run `./build.sh`** - This will build a binary which you can run in the folder of this repository. Note that you will lose all debugging abilities doing this.
 - **Use the built in Visual Studio Code configuration** - This is probably the best option if you do not mind using VS Code.
-- **Manually configure your IDE** - The basic steps that your IDE will want to do is run `cd frontend && npm i && npm run build` before debugging the Go project. Doing this can vary between IDE's.
+- **Manually configure your IDE** - The basic steps that your IDE will want to do is run `cd frontend && nvm use && npm i && npm run build` before debugging the Go project. Doing this can vary between IDE's.
 
 #### Production deployment
 In production, we use the Dockerfile which is in the root of this project. From here, you can pass all of the environment variables in from above, making it a pretty painless deploy.
