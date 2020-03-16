@@ -20,7 +20,7 @@ To configure bristol.xyz, you will need to set the following environment variabl
 - `INITIAL_USER` - A user in the format of `email:password` which will be initially created with administrator permissions if this is a initial install (there are no keys in the Redis database).
 
 #### Sentry Configuration
-- `SENTRY_DSN` - The DSN which is in use for Sentry. A blank DSN will result in errors being logged to the console.
+- `SENTRY_DSN` - The DSN which is in use for Sentry.
 
 #### Redis Configuration
 - `REDIS_HOST` - The Redis host. Defaults to `localhost:6379`.
