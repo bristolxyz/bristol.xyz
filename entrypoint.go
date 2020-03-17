@@ -23,8 +23,8 @@ func main() {
 		panic(err)
 	}
 
-	// Load Redis.
-	err = clients.CreateRedisClient()
+	// Load MongoDB.
+	err = clients.CreateMongoClient()
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)

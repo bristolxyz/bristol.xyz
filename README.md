@@ -3,7 +3,7 @@ The codebase for bristol.xyz.
 
 ## Requirements
 The requirements for hosting this are the following:
-- A Redis database. This stores all of the records which are used on the website.
+- A MongoDB database. This stores all of the records which are used on the website.
 - A S3-compatible storage solution. This stores all the files which are used on the website. In production we use DigitalOcean Spaces. For development, you can use a solution such as Amazon S3 on AWS free tier if you do not already have a Spaces subscription.
 
 ## Configuration
@@ -22,9 +22,9 @@ To configure bristol.xyz, you will need to set the following environment variabl
 #### Sentry Configuration
 - `SENTRY_DSN` - The DSN which is in use for Sentry.
 
-#### Redis Configuration
-- `REDIS_HOST` - The Redis host. Defaults to `localhost:6379`.
-- `REDIS_PASSWORD` - The password for the Redis database. Defaults to none.
+#### MongoDB Configuration
+- `MONGODB_URI` - The connection URI for your MongoDB instance. Defaults to `mongodb://localhost:27017`.
+- `MONGODB_DATABASE` - The database to use for MongoDB. Defaults to `bristolxyz`.
 
 #### S3 Configuration
 - `S3_ENDPOINT` - The endpoint for the S3 provider such as Amazon S3 or DigitalOcean Spaces.
