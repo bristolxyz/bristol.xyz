@@ -22,7 +22,7 @@ func CreateMongoClient() error {
 	if DB == "" {
 		DB = "bristolxyz"
 	}
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(URI))
 	if err != nil {
 		return err
 	}
