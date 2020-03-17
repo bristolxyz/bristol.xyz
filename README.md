@@ -17,7 +17,7 @@ When you configure your Amazon S3/DigitalOcean Spaces bucket, you will want sure
 To configure bristol.xyz, you will need to set the following environment variables:
 
 #### Initialisation
-- `INITIAL_USER` - A user in the format of `email:password` which will be initially created with administrator permissions if this is a initial install (there are no keys in the Redis database).
+- `INITIAL_USER` - A user in the format of `email:password` which will be initially created with administrator permissions if this is a initial install (there are no items in the `users` collection).
 
 #### Sentry Configuration
 - `SENTRY_DSN` - The DSN which is in use for Sentry.
