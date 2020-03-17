@@ -9,8 +9,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// MongoClient is the MongoDB client we are using.
-var MongoClient *mongo.Client
+// MongoDatabase is the MongoDB database we are using.
+var MongoDatabase *mongo.Database
 
 // CreateMongoClient is used to create the MongoDB client.
 func CreateMongoClient() error {
@@ -26,6 +26,6 @@ func CreateMongoClient() error {
 	if err != nil {
 		return err
 	}
-	MongoClient = client
+	MongoDatabase = client.Database(DB)
 	return client.Ping(context.TODO(), readpref.Primary())
 }
