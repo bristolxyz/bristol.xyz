@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"github.com/bristolxyz/bristol.xyz/clients"
+	"github.com/bristolxyz/bristol.xyz/utils"
 	"github.com/getsentry/sentry-go"
 	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
@@ -39,6 +40,11 @@ func init() {
 				sentry.CaptureException(err)
 				panic(err)
 			}
+			InitialUser := utils.RequiredEnvs("INITIAL_USER")["INITIAL_USER"]
+			s := strings.Split(InitialUser, ":")
+			Email := s[0]
+			Password := s[1]
+			NewUser(Email, Password, true, true, nil, nil)
 		}
 		cur, err = clients.MongoDatabase.Collection("tokens").Indexes().List(context.TODO())
 		if err != nil {
