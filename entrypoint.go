@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/bristolxyz/bristol.xyz/models"
 	"os"
 
 	"github.com/bristolxyz/bristol.xyz/clients"
@@ -29,6 +30,9 @@ func main() {
 		sentry.CaptureException(err)
 		panic(err)
 	}
+
+	// Run post-database load tasks.
+	models.RunDatabaseInitTasks()
 
 	// Load S3.
 	clients.S3Init()
