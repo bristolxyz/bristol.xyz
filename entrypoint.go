@@ -44,8 +44,11 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	// Create the handler.
+	// Create the Sentry handler.
 	e.Use(sentryecho.New(sentryecho.Options{}))
+
+	// Add the user middleware.
+	e.Use(UserMiddleware)
 
 	// Test route.
 	e.GET("/", func(c echo.Context) error {
