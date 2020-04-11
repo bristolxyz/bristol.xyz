@@ -8,8 +8,9 @@ import (
 	"github.com/getsentry/sentry-go"
 	sentryecho "github.com/getsentry/sentry-go/echo"
 	"github.com/joho/godotenv"
-	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+
+	_ "github.com/bristolxyz/bristol.xyz/routes"
 )
 
 func main() {
@@ -37,25 +38,19 @@ func main() {
 	// Load S3.
 	clients.S3Init()
 
-	// Create the web server.
-	e := echo.New()
-
 	// Enable the default logging and recovery middleware.
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	clients.EchoInstance.Use(middleware.Logger())
+	clients.EchoInstance.Use(middleware.Recover())
 
 	// Create the Sentry handler.
-	e.Use(sentryecho.New(sentryecho.Options{}))
+	clients.EchoInstance.Use(sentryecho.New(sentryecho.Options{}))
 
 	// Add the user middleware.
-	e.Use(UserMiddleware)
+	clients.EchoInstance.Use(UserMiddleware)
 
-	// Test route.
-	e.GET("/", func(c echo.Context) error {
-		_, err := c.Response().Write([]byte("Hello World!"))
-		return err
-	})
+	// Serve the scripts folder.
+	clients.EchoInstance.Static("/scripts", "scripts")
 
 	// Start the web server.
-	e.Logger.Fatal(e.Start(":8080"))
+	clients.EchoInstance.Logger.Fatal(clients.EchoInstance.Start(":8080"))
 }
