@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bristol.xyz - {{ .Title }}</title>
+        <meta charset="UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Bristol,news,press">
+        <meta name="description" content="{{ .Description }}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Bristol.xyz - {{ .Title }}">
+        <meta property="og:url" content="https://bristol.xyz">
+        <meta property="og:description" content="{{ .Description }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        {{ .AdditionalHeadHTML }}
+    </head>
+
+    <body>
+        {{ .ContentHTML }}
+    </body>
+</html>

@@ -5,7 +5,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/bristolxyz/bristol.xyz/utils"
+	"github.com/bristolxyz/bristol.xyz/env"
 )
 
 // CDNHostname defines the CDN hostname.
@@ -16,7 +16,7 @@ var S3Instance *s3.S3
 
 // S3Init is used to initialse S3.
 func S3Init() {
-	EnvMap := utils.RequiredEnvs(
+	EnvMap := env.RequiredEnvs(
 		"S3_ENDPOINT", "S3_REGION", "S3_BUCKET", "CDN_HOSTNAME", "AWS_SECRET_ACCESS_KEY",
 		"AWS_ACCESS_KEY_ID")
 	CDNHostname = EnvMap["CDN_HOSTNAME"]

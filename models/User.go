@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"github.com/bristolxyz/bristol.xyz/clients"
-	"github.com/bristolxyz/bristol.xyz/utils"
+	"github.com/bristolxyz/bristol.xyz/env"
 	"github.com/getsentry/sentry-go"
 	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
@@ -40,7 +40,7 @@ func init() {
 				sentry.CaptureException(err)
 				panic(err)
 			}
-			InitialUser := utils.RequiredEnvs("INITIAL_USER")["INITIAL_USER"]
+			InitialUser := env.RequiredEnvs("INITIAL_USER")["INITIAL_USER"]
 			s := strings.Split(InitialUser, ":")
 			Email := s[0]
 			Password := s[1]

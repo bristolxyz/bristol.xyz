@@ -15,7 +15,10 @@ func UserMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		} else {
 			token = tc.Value
 		}
-		if token != "" {
+		if token == "" {
+			var b *models.User
+			c.Set("user", b)
+		} else {
 			c.Set("user", models.GetUserByToken(token))
 		}
 		return next(c)
