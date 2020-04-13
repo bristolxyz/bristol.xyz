@@ -1,0 +1,21 @@
+<div class="container" style="text-align: center; padding-top: 10px">
+    {{ if . }}
+        <div class="notification is-danger" style="text-align: left">
+            <b>Login Error:</b> {{ . }}
+        </div>
+    {{ end }}
+    <h1 class="title is-1">Login</h1>
+    <p>Login to Bristol.xyz for the ability to comment, subscribe to categories or write new news stories if you are an editor.</p>
+    <br>
+    <form method="post" action="/login" style="padding-left: 25%; padding-right: 25%">
+        <input class="input is-rounded field" type="email" placeholder="E-mail Address" name="email">
+        <input class="input is-rounded field" type="password" placeholder="Password" name="password">
+        <input class="button" value="Login" type="submit" placeholder="Login">
+    </form>
+    <hr>
+    <p>
+        <a href="/register">
+            Want to register for Bristol.xyz?
+        </a>
+    </p>
+</div>

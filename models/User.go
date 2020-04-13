@@ -89,7 +89,7 @@ type token struct {
 }
 
 func (u *User) createPassword(Password string) {
-	b, err := bcrypt.GenerateFromPassword([]byte(Password), 20)
+	b, err := bcrypt.GenerateFromPassword([]byte(Password), 12)
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)

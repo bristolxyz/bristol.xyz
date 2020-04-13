@@ -13,9 +13,53 @@
         <meta property="og:description" content="{{ .Description }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
         {{ .AdditionalHeadHTML }}
+        <!-- TODO: Favicon! -->
     </head>
 
-    <body>
-        {{ .ContentHTML }}
+    <body style="display: flex; min-height: 100vh; flex-direction: column;">
+        <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="/">
+                    Bristol.xyz (EDIT LOGO HERE)
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                        Popular Articles (TODO Favicon)
+                    </a>
+                    <a class="navbar-item">
+                        Topics (TODO Favicon)
+                    </a>
+                    <a class="navbar-item">
+                        Staff (TODO Favicon)
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <form action="/search" method="get">
+                            <label>
+                                <input class="input" type="text" placeholder="Search" name="q">
+                            </label>
+                        </form>
+                    </div>
+                    {{ if .User }}
+                        <p>Hello User! (TODO User)</p>
+                    {{ else }}
+                        <a class="navbar-item" href="/login">
+                            Login or Register
+                        </a>
+                    {{ end }}
+                </div>
+            </div>
+        </nav>
+        <div style="flex: 1">
+            {{ .ContentHTML }}
+        </div>
+        <footer class="footer" style="padding: 10px; text-align: center;">
+            <p>
+                <b>Bristol.xyz:</b> All content on this site is licensed to us unless otherwise specified. The source code for this website is on <a href="https://github.com/bristolxyz/bristol.xyz">GitHub.</a>
+            </p>
+        </footer>
     </body>
 </html>
