@@ -74,6 +74,7 @@
             </div>
         </nav>
         <div style="flex: 1">
+            {{ if .User }}
             {{ if not .User.Verified }}
             <div class="notification is-danger" style="border-radius: 0; margin-bottom: 0;" id="alert__notverified">
                 <strong>E-mail address not verified:</strong>
@@ -105,6 +106,7 @@
                     req.send();
                 }
             </script>
+            {{ end }}
             {{ end }}
             {{ .ContentHTML }}
         </div>
