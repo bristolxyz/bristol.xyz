@@ -31,6 +31,11 @@ To configure bristol.xyz, you will need to set the following environment variabl
 - `AWS_SECRET_ACCESS_KEY` - The AWS secret access key for the bucket which we are using for the CDN.
 - `AWS_ACCESS_KEY_ID` - The AWS access key ID for the bucket.
 
+#### Mailgun Configuration
+- `MAILGUN_DOMAIN` - The domain used for Mailgun.
+- `MAILGUN_KEY` - The private key for your Mailgun instance.
+- `FROM_ADDRESS` - The e-mail which e-mails are from (in the format `Name <email>`).
+
 ### Setting up your local environment/production deployment
 Now we have the environment variables listed down, we can continue the setup:
 

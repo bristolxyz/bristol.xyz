@@ -97,10 +97,14 @@ func (u *User) createPassword(Password string) {
 	u.PasswordHashSalt = base64.StdEncoding.EncodeToString(b)
 }
 
+func set(x bson.M) bson.M {
+	return bson.M{"$set": x}
+}
+
 // SetPassword is used to set a password in the database.
 func (u *User) SetPassword(Password string) {
 	u.createPassword(Password)
-	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, bson.M{"passwordHashSalt": u.PasswordHashSalt})
+	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, set(bson.M{"passwordHashSalt": u.PasswordHashSalt}))
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)
@@ -111,7 +115,7 @@ func (u *User) SetPassword(Password string) {
 // SetFirstName is used to set a first name in the database.
 func (u *User) SetFirstName(FirstName string) {
 	u.FirstName = &FirstName
-	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, bson.M{"firstName": &FirstName})
+	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, set(bson.M{"firstName": &FirstName}))
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)
@@ -121,7 +125,7 @@ func (u *User) SetFirstName(FirstName string) {
 // SetLastName is used to set a last name in the database.
 func (u *User) SetLastName(LastName string) {
 	u.LastName = &LastName
-	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, bson.M{"lastName": &LastName})
+	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, set(bson.M{"lastName": &LastName}))
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)
@@ -130,7 +134,7 @@ func (u *User) SetLastName(LastName string) {
 
 func (u *User) setVerifiedEmail(state bool) {
 	u.Verified = state
-	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, bson.M{"verified": state})
+	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, set(bson.M{"verified": state}))
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)
@@ -145,7 +149,7 @@ func (u *User) Verify() {
 // ChangeEmail is used to change an email within the database.
 func (u *User) ChangeEmail(Email string) {
 	u.Email = Email
-	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, bson.M{"email": Email})
+	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, set(bson.M{"email": Email}))
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)
@@ -156,7 +160,7 @@ func (u *User) ChangeEmail(Email string) {
 // ChangePFPUrl is used to change the PFP URL within the database.
 func (u *User) ChangePFPUrl(URL string) {
 	u.PFPUrl = URL
-	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, bson.M{"pfpUrl": URL})
+	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, set(bson.M{"pfpUrl": URL}))
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)
@@ -166,7 +170,7 @@ func (u *User) ChangePFPUrl(URL string) {
 
 func (u *User) setBanState(state bool) {
 	u.Banned = state
-	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, bson.M{"banned": state})
+	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, set(bson.M{"banned": state}))
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)
@@ -176,7 +180,7 @@ func (u *User) setBanState(state bool) {
 // Ban is used to drop the ban hammer.
 func (u *User) Ban() {
 	u.setBanState(true)
-	_, _ = clients.MongoDatabase.Collection("tokens").DeleteMany(context.TODO(), bson.M{"userId": u.ID})
+	_, _ = clients.MongoDatabase.Collection("tokens").DeleteMany(context.TODO(), set(bson.M{"userId": u.ID}))
 }
 
 // Unban is used to unban a user.
@@ -186,7 +190,7 @@ func (u *User) Unban() {
 
 func (u *User) setAdminState(state bool) {
 	u.Admin = state
-	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, bson.M{"admin": state})
+	_, err := clients.MongoDatabase.Collection("users").UpdateOne(context.TODO(), bson.M{"_id": u.ID}, set(bson.M{"admin": state}))
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)

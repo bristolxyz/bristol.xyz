@@ -25,18 +25,18 @@ func init() {
 }
 
 // GenerateBase is used to generate the base HTML around the provided content.
-func GenerateBase(Title, Description, AdditionalHeadHTML, ContentHTML string, User *models.User) string {
+func GenerateBase(Title, Description, AdditionalHeadHTML, ContentHTML string, User *models.User) []byte {
 	b := bytes.Buffer{}
 	err := baseTemplate.Execute(&b, map[string]interface{}{
-		"Title": Title,
-		"Description": Description,
+		"Title":              Title,
+		"Description":        Description,
 		"AdditionalHeadHTML": template.HTML(AdditionalHeadHTML),
-		"ContentHTML": template.HTML(ContentHTML),
-		"User": User,
+		"ContentHTML":        template.HTML(ContentHTML),
+		"User":               User,
 	})
 	if err != nil {
 		sentry.CaptureException(err)
 		panic(err)
 	}
-	return b.String()
+	return b.Bytes()
 }

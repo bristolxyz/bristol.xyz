@@ -14,8 +14,8 @@ func init() {
 
 		// Return the rendered content.
 		c.Response().Header().Set("Content-Type", "text/html;charset=utf-8")
-		_, err := c.Response().Write([]byte(utils.GenerateBase("Home", "The homepage for Bristol.xyz - Bristol's leading and open news site",
-			"", "<h1>Hello World!</h1>", User)))
+		_, err := c.Response().Write(utils.GenerateBase("Home", "The homepage for Bristol.xyz - Bristol's leading and open news site",
+			"", "<h1>Hello World!</h1>", User))
 		return err
 	})
 }

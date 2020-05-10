@@ -44,8 +44,8 @@ func init() {
 
 		// Return the rendered content.
 		c.Response().Header().Set("Content-Type", "text/html;charset=utf-8")
-		_, err = c.Response().Write([]byte(utils.GenerateBase("Login", "The login page for Bristol.xyz.",
-			"", b.String(), User)))
+		_, err = c.Response().Write(utils.GenerateBase("Login", "The login page for Bristol.xyz.",
+			"", b.String(), User))
 		return err
 	})
 
@@ -62,8 +62,8 @@ func init() {
 
 			// Return the rendered content.
 			c.Response().Header().Set("Content-Type", "text/html;charset=utf-8")
-			_, err = c.Response().Write([]byte(utils.GenerateBase("Login", "The login page for Bristol.xyz.",
-				"", b.String(), c.Get("user").(*models.User))))
+			_, err = c.Response().Write(utils.GenerateBase("Login", "The login page for Bristol.xyz.",
+				"", b.String(), c.Get("user").(*models.User)))
 			return err
 		}
 
@@ -85,9 +85,9 @@ func init() {
 			return RenderLoginPageWithError("E-mail address or password is incorrect.")
 		}
 		c.SetCookie(&http.Cookie{
-			Name:       "token",
-			Value:      *token,
-			MaxAge:		2592000,
+			Name:   "token",
+			Value:  *token,
+			MaxAge: 2592000,
 		})
 
 		// Redirect home.

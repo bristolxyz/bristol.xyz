@@ -74,6 +74,38 @@
             </div>
         </nav>
         <div style="flex: 1">
+            {{ if not .User.Verified }}
+            <div class="notification is-danger" style="border-radius: 0; margin-bottom: 0;" id="alert__notverified">
+                <strong>E-mail address not verified:</strong>
+                Your e-mail address is not verified. This means you will not be able to get notifications. 
+            </div>
+            <script>
+                // Add the verification e-mail option if JS is enabled.
+                (function() {
+                    // Get the alert element.
+                    var el = document.getElementById("alert__notverified");
+
+                    // Add the resend option since we have JS.
+                    el.innerHTML += '<a href="javascript:sendVerificationEmail()">Click here to resend the verification e-mail.</a>';
+                })();
+
+                // Send the verification e-mail.
+                function sendVerificationEmail() {
+                    var req = new XMLHttpRequest();
+                    req.onreadystatechange = function() {
+                        if (this.readyState == 4) {
+                            if (this.status == 200 || this.status == 204) {
+                                alert("Verification e-mail successfully sent.");
+                            } else {
+                                alert("Failed to send verification e-mail: " + req.responseText);
+                            }
+                        }
+                    };
+                    req.open("GET", "/resend", true);
+                    req.send();
+                }
+            </script>
+            {{ end }}
             {{ .ContentHTML }}
         </div>
         <footer class="footer" style="padding: 10px; text-align: center;">
