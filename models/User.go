@@ -15,7 +15,7 @@ import (
 )
 
 // DefaultPFPURL is the PFP for the default user.
-var DefaultPFPURL = "https://" + clients.CDNHostname + "/default_pfp.png"
+var DefaultPFPURL = "/static/png/default_pfp.png"
 
 // Initialises the e-mail index for users.
 func init() {
@@ -72,20 +72,20 @@ func init() {
 
 // User is the model which is used to define a user.
 type User struct {
-	ID    string `json:"id" bson:"_id"`
-	Email    string `json:"email" bson:"email"`
-	Verified bool   `json:"verified" bson:"verified"`
-	Admin    bool   	`json:"admin" bson:"admin"`
-	Banned    bool   	`json:"banned" bson:"banned"`
-	PasswordHashSalt string `json:"passwordHashSalt" bson:"passwordHashSalt"`
-	FirstName *string   `json:"firstName" bson:"firstName"`
-	LastName *string   `json:"lastName" bson:"lastName"`
-	PFPUrl string `json:"pfpUrl" bson:"pfpUrl"`
+	ID               string  `json:"id" bson:"_id"`
+	Email            string  `json:"email" bson:"email"`
+	Verified         bool    `json:"verified" bson:"verified"`
+	Admin            bool    `json:"admin" bson:"admin"`
+	Banned           bool    `json:"banned" bson:"banned"`
+	PasswordHashSalt string  `json:"passwordHashSalt" bson:"passwordHashSalt"`
+	FirstName        *string `json:"firstName" bson:"firstName"`
+	LastName         *string `json:"lastName" bson:"lastName"`
+	PFPUrl           string  `json:"pfpUrl" bson:"pfpUrl"`
 }
 
 type token struct {
-	ID    string `json:"id" bson:"_id"`
-	UserID    string `json:"userId" bson:"userId"`
+	ID     string `json:"id" bson:"_id"`
+	UserID string `json:"userId" bson:"userId"`
 }
 
 func (u *User) createPassword(Password string) {
@@ -284,14 +284,14 @@ func LogoutUser(Token string) {
 func NewUser(Email, Password string, Admin, Verified bool, FirstName, LastName *string) (*User, string) {
 	UserID := uuid.Must(uuid.NewUUID()).String()
 	u := &User{
-		ID:               UserID,
-		Email:            Email,
-		Verified:         Verified,
-		Admin:            Admin,
-		Banned:           false,
-		FirstName:        FirstName,
-		LastName:         LastName,
-		PFPUrl:           DefaultPFPURL,
+		ID:        UserID,
+		Email:     Email,
+		Verified:  Verified,
+		Admin:     Admin,
+		Banned:    false,
+		FirstName: FirstName,
+		LastName:  LastName,
+		PFPUrl:    DefaultPFPURL,
 	}
 	u.createPassword(Password)
 	_, err := clients.MongoDatabase.Collection("users").InsertOne(context.TODO(), u)
