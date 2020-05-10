@@ -1,0 +1,18 @@
+<div class="container" style="text-align: center; padding-top: 10px">
+    {{ if . }}
+        <div class="notification is-danger" style="text-align: left">
+            <b>Registration Error:</b> {{ . }}
+        </div>
+    {{ end }}
+    <h1 class="title is-1">Register</h1>
+    <p>Register with Bristol.xyz for the ability to comment or subscribe to categories.</p>
+    <br>
+    <form method="post" action="/register" style="padding-left: 25%; padding-right: 25%">
+        <input class="input is-rounded field" type="email" placeholder="E-mail Address (Required)" name="email">
+        <input class="input is-rounded field" type="text" placeholder="First Name" name="firstName">
+        <input class="input is-rounded field" type="text" placeholder="Last Name" name="lastName">
+        <input class="input is-rounded field" type="password" placeholder="Password (Required)" name="password">
+        <input class="input is-rounded field" type="password" placeholder="Confirm Password (Required)" name="confirmPassword">
+        <input class="button" value="Register" type="submit" placeholder="Register">
+    </form>
+</div>
