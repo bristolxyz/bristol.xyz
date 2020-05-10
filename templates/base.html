@@ -44,7 +44,26 @@
                         </form>
                     </div>
                     {{ if .User }}
-                        <p>Hello User! (TODO User)</p>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                Hello {{ if .User.FirstName }}
+                                    {{ .User.FirstName }}
+                                {{ else }}
+                                    {{ .User.Email }}
+                                {{ end }}
+                            </a>
+                            <div class="navbar-dropdown is-boxed">
+                                <a class="navbar-item" href="/profile">
+                                    Profile
+                                </a>
+                                <a class="navbar-item" href="/notifications">
+                                    E-mail notifications
+                                </a>
+                                <a class="navbar-item" href="/logout">
+                                    Logout
+                                </a>
+                            </div>
+                        </div>
                     {{ else }}
                         <a class="navbar-item" href="/login">
                             Login or Register

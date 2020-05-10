@@ -20,6 +20,7 @@ func UserMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			c.Set("user", b)
 		} else {
 			c.Set("user", models.GetUserByToken(token))
+			c.Set("token", token)
 		}
 		return next(c)
 	}
