@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/bristolxyz/bristol.xyz/models"
 	"github.com/labstack/echo/v4"
+	"net/http"
 )
 
 // UserMiddleware is used to handle the authentication of users where this is required.
@@ -19,8 +20,18 @@ func UserMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 			var b *models.User
 			c.Set("user", b)
 		} else {
-			c.Set("user", models.GetUserByToken(token))
-			c.Set("token", token)
+			u := models.GetUserByToken(token)
+			if u != nil {
+				c.Set("token", token)
+				if u.Banned {
+					c.SetCookie(&http.Cookie{
+						Name:   "token",
+						MaxAge: -1,
+					})
+					u = nil
+				}
+			}
+			c.Set("user", u)
 		}
 		return next(c)
 	}

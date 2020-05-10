@@ -80,9 +80,12 @@ func init() {
 		}
 
 		// Handle user authentication.
-		_, token := models.LoginUser(Email, Password)
+		u, token := models.LoginUser(Email, Password)
 		if token == nil {
 			return RenderLoginPageWithError("E-mail address or password is incorrect.")
+		}
+		if u.Banned {
+			return RenderLoginPageWithError("You have been banned.")
 		}
 		c.SetCookie(&http.Cookie{
 			Name:   "token",
