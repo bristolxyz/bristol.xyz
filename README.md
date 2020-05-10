@@ -10,9 +10,6 @@ The requirements for hosting this are the following:
 
 Configuration can be quite simply done in a few steps:
 
-### Configuring the bucket
-When you configure your Amazon S3/DigitalOcean Spaces bucket, you will want sure that the public can read everything in the bucket, but not list everything in the bucket. Instructions on how to do this can vary between providers. From here, you will want to copy everything inside the `bucket_base` folder in this repository and put it inside the bucket. Your bucket is ready!
-
 ### Environment Variables
 To configure bristol.xyz, you will need to set the following environment variables:
 
