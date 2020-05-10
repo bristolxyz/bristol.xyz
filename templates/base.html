@@ -46,6 +46,7 @@
                     {{ if .User }}
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">
+                                <img src="{{ .User.PFPUrl }}" style="margin-right: 10px; border-radius: 50%;" >
                                 Hello {{ if .User.FirstName }}
                                     {{ .User.FirstName }}
                                 {{ else }}

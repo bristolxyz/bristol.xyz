@@ -48,8 +48,8 @@ func main() {
 	// Add the user middleware.
 	clients.EchoInstance.Use(UserMiddleware)
 
-	// Serve the scripts folder.
-	clients.EchoInstance.Static("/scripts", "scripts")
+	// Serve the static folder.
+	clients.EchoInstance.Static("/static", "static")
 
 	// Start the web server.
 	clients.EchoInstance.Logger.Fatal(clients.EchoInstance.Start(":8080"))
